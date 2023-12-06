@@ -1,2 +1,2 @@
 # bpftrace
-Some useful bpftrace script in normal sysadmin activities
+Some useful bpftrace scripts in normal sysadmin activities
