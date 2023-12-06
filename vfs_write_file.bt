@@ -1,0 +1,12 @@
+#include <linux/fs.h>
+#include <asm-generic/fcntl.h>
+
+kprobe:vfs_write
+{
+	$file = (struct file *)arg0;
+	$filename = $file->f_path.dentry->d_name.name;
+	// check if filetype is regular, not socket,fifo, ...
+	if ((($file->f_inode->i_mode >> 12) & 15) == DT_REG) {
+		printf("%s is writting file %s \n",comm, str($filename));
+	}
+}
